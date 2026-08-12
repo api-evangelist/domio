@@ -1,0 +1,186 @@
+generated: '2026-08-12'
+method: probed
+source: https://www.staydomio.com/
+name: Domio well-known + contract discovery probe
+description: >-
+  Negative probe record for Domio. Domio Inc. ceased operations in November 2020 and
+  sold its assets through an assignment for the benefit of creditors. Its former host
+  staydomio.com was re-registered on 2021-09-19 (GoDaddy / Domains By Proxy) by an
+  unrelated party and now serves a GoDaddy parking lander. That lander answers HTTP 200
+  with the SAME 114-byte HTML redirect shell for EVERY path, including every
+  /.well-known/* and every spec path. NONE of these 200s is a document. No WellKnown,
+  SecurityTxt, AgentCard, LLMsTxt or OpenAPI pointer is emitted from this probe, and
+  none should ever be emitted from it in a later round.
+
+host_status:
+  host: www.staydomio.com
+  controlled_by_provider: false
+  disposition: parked
+  registrar: GoDaddy.com, LLC
+  registrant_organization: Domains By Proxy, LLC
+  domain_created: '2021-09-19'
+  domain_expires: '2026-09-19'
+  nameservers:
+  - ns47.domaincontrol.com
+  - ns48.domaincontrol.com
+  note: >-
+    Creation date is AFTER Domio's November 2020 shutdown, so this registration is not
+    the company's. Root serves <html><head><script>window.onload=...href="/lander"</script>
+    and /lander is a GoDaddy parking-lander SPA (window.LANDER_SYSTEM="PW", img1.wsimg.com).
+
+soft_200_catch_all: true
+soft_200_note: >-
+  Every probed path returned 200 with content-length 114 and content-type text/html —
+  the identical parking redirect stub. Treat all of them as misses.
+
+probes:
+- path: /.well-known/security.txt
+  url: https://www.staydomio.com/.well-known/security.txt
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/openid-configuration
+  url: https://www.staydomio.com/.well-known/openid-configuration
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/oauth-authorization-server
+  url: https://www.staydomio.com/.well-known/oauth-authorization-server
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/api-catalog
+  url: https://www.staydomio.com/.well-known/api-catalog
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/ai-plugin.json
+  url: https://www.staydomio.com/.well-known/ai-plugin.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/agent-card.json
+  url: https://www.staydomio.com/.well-known/agent-card.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+  note: HTML shell, not a JSON AgentCard object. No AgentCard pointer emitted.
+- path: /.well-known/agent.json
+  url: https://www.staydomio.com/.well-known/agent.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+  note: Legacy pre-0.3 path. HTML shell, not a JSON AgentCard object.
+
+contract_discovery:
+  openapi:
+  - url: https://www.staydomio.com/openapi.json
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.staydomio.com/openapi.yaml
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.staydomio.com/swagger.json
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.staydomio.com/api-docs
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.staydomio.com/docs
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  graphql: []
+  mcp: []
+  a2a_agent_card: []
+  api_hosts_resolved:
+  - host: api.staydomio.com
+    dns: NXDOMAIN
+    status: null
+  - host: developer.staydomio.com
+    dns: NXDOMAIN
+    status: null
+  - host: developers.staydomio.com
+    dns: NXDOMAIN
+    status: null
+  - host: docs.staydomio.com
+    dns: NXDOMAIN
+    status: null
+  - host: app.staydomio.com
+    dns: NXDOMAIN
+    status: null
+
+llms_txt:
+  url: https://www.staydomio.com/llms.txt
+  status: 200
+  content_type: text/plain
+  bytes: 65
+  is_real_llms_txt: false
+  verbatim: |
+    User-agent: *
+    Allow: /
+    Disallow-Training: /
+    Sitemap: /sitemap.xml
+  note: >-
+    This is GoDaddy parking boilerplate in robots.txt syntax, published by the domain
+    parking system — not by Domio, and not in llms.txt format (no H1, no link sections).
+    Recorded as a MISS. No LLMsTxt pointer emitted.
+
+sitemap:
+  url: https://www.staydomio.com/sitemap.xml
+  status: 200
+  urls:
+  - https://www.staydomio.com/lander
+  note: Single parking-lander URL. No content, no reference pages.
+
+other_surfaces:
+- what: GitHub organization
+  url: https://api.github.com/orgs/domio
+  status: 404
+  result: miss
+- what: GitHub organization
+  url: https://api.github.com/orgs/staydomio
+  status: 404
+  result: miss
+- what: npm registry search "domio"
+  url: https://registry.npmjs.org/-/v1/search?text=domio
+  status: 200
+  result: miss
+  note: >-
+    The npm package `domio` (v0.16.4, published 2022-08-27) is getify's DOM/Event helper
+    library for Monio. Unrelated to Domio Inc. No first-party packages exist.
+- what: Forge Global secondary-market listing (the harvest source)
+  url: https://forgeglobal.com/domio_stock/
+  status: 403
+  result: blocked
+  note: Forge returns 403 to non-browser clients; it is a secondary-market share listing, not a company site.
+
+conclusion: >-
+  Domio has no API surface to enrich and no host it still controls. This is a historical
+  record, not a thin profile. Any future round should re-read host_status before probing
+  staydomio.com again.
