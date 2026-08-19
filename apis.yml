@@ -36,7 +36,7 @@ x-domain-note: >-
   HTML redirect stub on EVERY path, including all /.well-known/* and spec paths. Those 200s
   are not documents. See well-known/domio-well-known.yml. It is NOT the Domio company site
   and is deliberately not wired as a Website pointer.
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
